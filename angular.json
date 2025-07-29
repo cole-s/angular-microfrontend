@@ -151,99 +151,35 @@
         }
       }
     },
-    "login": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+    "login-lib": {
+      "projectType": "library",
       "root": "projects/login",
       "sourceRoot": "projects/login/src",
-      "prefix": "app",
+      "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "outputPath": "dist/login",
-            "index": "projects/login/src/index.html",
-            "main": "projects/login/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "tsConfig": "projects/login/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/login/src/favicon.ico",
-              "projects/login/src/assets"
-            ],
-            "styles": [
-              "projects/login/src/styles.scss"
-            ],
-            "scripts": []
+            "project": "projects/login/ng-package.json"
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "outputHashing": "all"
+              "tsConfig": "projects/login/tsconfig.login.lib.json"
             },
             "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "tsConfig": "projects/login/tsconfig.login.lib.json"
             }
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "login:build:production"
-            },
-            "development": {
-              "browserTarget": "login:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "login:build"
-          }
-        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "tsConfig": "projects/login/tsconfig.login.lib.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
-            ],
-            "tsConfig": "projects/login/tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/login/src/favicon.ico",
-              "projects/login/src/assets"
-            ],
-            "styles": [
-              "projects/login/src/styles.scss"
-            ],
-            "scripts": []
+            ]
           }
         }
       }
